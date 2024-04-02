@@ -1,0 +1,60 @@
+<div class="container-fluid shadow bg-white fixed-top" style="z-index: 79;">
+	<div class="row">
+
+		<!-- LOGO -->
+		<a class="offset-2 col-xxl-2 d-none d-xxl-block position-relative" routerLink="/">
+			<img src="../../../assets/96545225_padded_logo.png" class="img-fluid position-absolute top-50 start-50 translate-middle" alt="">
+		</a>
+
+		<!-- SEARCHBAR -->
+		<div class="col-xxl-3 col-xl-5 col-md-6 col-sm-3 py-4">
+			<div class="input-group">
+				<input type="search" id="form1" class="form-control border border-right" placeholder="Søg" />
+				<div class="input-group-append border border-left-0">
+					<button type="button" class="btn border-left-0 rounded-0" style="background-color: #fff;">
+						<i class="fa fa-search"></i>
+					</button>
+				</div>
+			</div>
+		</div>
+
+		<!-- NAVIGATION -->
+		<div class="col-xxl-3 col-xl-5 col-md-6 col-sm-9 py-4" >
+			<div class="row">
+				<div class="col">
+					<a routerLink="../pages/profile"><button class="btn btn-primary w-100 h-100 p-0">
+						Profil
+						<i class="fa-solid fa-user fa-fw"></i>
+					</button></a>
+				</div>
+
+				<div class="col">
+					<a routerLink="cart">
+						<button class="btn btn-primary w-100 h-100 p-0 position-relative">
+							<small class="basket-number" *ngIf="basketCount != 0">{{basketCount}}</small>
+							Kurv
+							<i class="fa-solid fa-bag-shopping fa-fw"></i>
+						</button>
+					</a>
+				</div>
+
+				<div class="col" [ngSwitch]="loggedIn">
+					<a (click)="logOut()">
+						<button class="btn btn-primary w-100 h-100" *ngSwitchCase="true" >
+							Logud
+							<i class="fa-solid fa-right-from-bracket fa-fw"></i>
+						</button>
+					</a>
+
+					<a (click)="logIn()">
+						<button class="btn btn-primary w-100 h-100" *ngSwitchCase="false">
+							Login
+							<i class="fa-solid fa-right-to-bracket fa-fw"></i>
+						</button>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="push-content" style="padding-top: 5rem;"></div>

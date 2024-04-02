@@ -1,0 +1,22 @@
+i {
+	cursor: pointer;
+	transition: .1s ease;
+}
+
+.basket-number {
+	border: 2px solid #fff;
+border-radius: 100%;
+color: #fff;
+font-size: 14px;
+font-style: normal;
+font-weight: 700;
+height: 26px;
+position: absolute;
+top: -10px;
+width: 26px;
+align-items: center;
+display: flex;
+justify-content: center;
+background-color: #be0000;
+right: -10px;
+}

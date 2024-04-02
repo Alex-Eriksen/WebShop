@@ -1,0 +1,39 @@
+<div class="offset-3 col-6 p-3" style="background-color: #fff;">
+  <h4 class="offset-1">Din Profil</h4>
+  <div class="row gy-4">
+    <div class="offset-1 col-10 gy-4">
+      <div class="row gx-3 gy-2" [ngClass]="{'noselect': allowEdit ? false : true }">
+        <div class="col-6">
+          <label class="labels">Fornavn</label>
+          <input type="text" class="form-control" [(ngModel)]="customer.firstName" [disabled]="allowEdit ? false  : true">
+        </div>
+        <div class="col-6">
+          <label class="labels">Efternavn</label>
+          <input type="text" class="form-control" [(ngModel)]="customer.lastName" [disabled]="allowEdit ? false  : true">
+        </div>
+        <div class="col-12">
+          <label class="labels">Email</label>
+          <input type="text" class="form-control" [(ngModel)]="customer.account.email" [disabled]="allowEdit ? false  : true">
+        </div>
+        <div class="col-12">
+          <label class="labels">Telefonnummer</label>
+          <input type="text" class="form-control" [(ngModel)]="customer.phoneNumber" [disabled]="allowEdit ? false  : true">
+        </div>
+        <div class="col-6">
+          <label class="labels">Post Nummer</label>
+          <input type="text" class="form-control" [(ngModel)]="customer.zipCode" [disabled]="allowEdit ? false  : true">
+        </div>
+        <div class="col-6">
+          <label class="labels">Land</label>
+          <input type="text" class="form-control" [(ngModel)]="customer.country.countryName" [disabled]="allowEdit ? false  : true">
+        </div>
+      </div>
+    </div>
+    <div class="offset-1 col-10 d-flex gap-3 justify-content-end">
+		<button *ngIf="isAdmin" class="btn btn-primary" routerLink="/admin" type="button">Administrator</button>
+        <button class="btn btn-primary profile-button" type="button" (click)="route()" disabled>Ændrer kodeord</button>
+        <button class="btn btn-primary profile-button" type="button" (click)="edit()">Ændrer oplysninger</button>
+        <button class="btn btn-primary profile-button" type="button" (click)="save()" [disabled]="allowEdit ? false  : true">Gem Ændringerne</button>
+      </div>
+    </div>
+</div>

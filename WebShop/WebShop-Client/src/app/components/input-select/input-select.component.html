@@ -1,0 +1,11 @@
+<div>
+	<div class="position-relative">
+		<label class="form-label">{{label}}</label>
+		<span *ngIf="required" class="text-danger form-text">*</span>
+		<div class="form-text text-danger position-absolute end-0 top-0" *ngIf="errorMessage !== ''">{{errorMessage}}</div>
+	</div>
+	<select class="form-select" [required]="required" [value]="valueBind" (change)="valueBindChange.emit(ref.value)" (focusout)="validate(ref)" #ref>
+		<option value="">Vælg</option>
+		<option *ngFor="let option of options" [selected]="valueBind == option.value" [value]="option.value">{{option.key}}</option>
+	</select>
+</div>

@@ -1,0 +1,68 @@
+<div class="container-fluid pt-2">
+	<div class="row gy-4">
+		<div class="offset-2 col-8">
+			<a routerLink="/admin" type="button" class="w-25 btn btn-primary bg-primary" ><i class="fa-solid fa-arrow-left-long"></i> Tilbage</a>
+		</div>
+		<div class="offset-2 col-8">
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>Fornavn</th>
+						<th>Efternavn</th>
+						<th>Telefon nummer</th>
+						<th>Køn</th>
+						<th>Postnummer</th>
+						<th>Registrerings Dato</th>
+						<th>Handlinger</th>
+					</tr>
+				</thead>
+
+				<tbody>
+					<tr *ngFor="let customer of customers">
+						<td>{{ customer.customerID }}</td>
+						<td>{{ customer.firstName }}</td>
+						<td>{{ customer.lastName }}</td>
+						<td>{{ customer.phoneNumber }}</td>
+						<td>{{ customer.gender }}</td>
+						<td>{{ customer.zipCode }}</td>
+						<td>{{ customer.created_At | date}}</td>
+						<td class="d-flex gap-2">
+							<button class="btn btn-success" (click)="edit(customer)"><i class="fa-solid fa-pen-to-square"></i></button>
+							<button class="btn btn-danger" (click)="delete(customer)"><i class="fa-solid fa-trash"></i></button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+<div *ngIf="customer.customerID != 0" style="z-index: 80;" class="d-flex flex-column gap-2 bg-light shadow position-absolute overflow-auto top-50 start-50 translate-middle w-75 h-75 rounded p-3 mt-1">
+	<div class="row">
+		<div class="col-6 d-flex flex-column gap-3">
+			<input-field label="Email" type="email" [(valueBind)]="account.email" (isValidChange)="validate($event)"></input-field>
+
+			<input-field label="Brugernavn" [(valueBind)]="account.username" (isValidChange)="validate($event)"></input-field>
+
+			<input-select label="Rolle" [options]="roles" [(valueBind)]="account.role" (isValidChange)="validate($event)"></input-select>
+		</div>
+
+		<div class="col-6 d-flex flex-column gap-3">
+			<input-field label="Fornavn" [(valueBind)]="customer.firstName" (isValidChange)="validate($event)"></input-field>
+
+			<input-field label="Efternavn" [(valueBind)]="customer.lastName" (isValidChange)="validate($event)"></input-field>
+
+			<input-field label="Telefon nummer" [(valueBind)]="customer.phoneNumber" (isValidChange)="validate($event)"></input-field>
+
+			<input-select label="Køn" [options]="genders" [(valueBind)]="customer.gender" (isValidChange)="validate($event)"></input-select>
+
+			<input-field label="Postnummer" [(valueBind)]="customer.zipCode" (isValidChange)="validate($event)"></input-field>
+		</div>
+	</div>
+
+	<div class="position-absolute bottom-0 end-0 m-3 d-flex gap-2">
+		<button type="button" class="btn btn-primary bg-primary px-3" [disabled]="isValid ? false : true" (click)="save()">Gem <i class="fa-solid fa-floppy-disk"></i></button>
+		<button type="button" class="btn btn-primary bg-primary px-3" (click)="cancel()">Annuller <i class="fa-solid fa-ban"></i></button>
+	</div>
+</div>

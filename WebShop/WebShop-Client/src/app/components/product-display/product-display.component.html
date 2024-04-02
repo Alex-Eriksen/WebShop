@@ -1,0 +1,39 @@
+<div class="card my-2 py-3 pe-3 border-0 hover-pop" style="border-radius: 0;">
+	<div class="row g-0 border-bottom">
+	  <div class="col-4 d-flex flex-column justify-content-center align-items-center position-relative image-container" (click)="goToProduct()">
+		<img [src]="'http://localhost:5001/api/product/photo/'+product.imageName" class="img-fluid rounded-start" alt="..." width="150" height="100">
+		<small *ngIf="discountAmount != 0" class="discount">-{{discountAmount}}%</small>
+		<p class="mb-0 p-2">{{product.productID}}</p>
+	  </div>
+
+	  <div class="col-8">
+		<div class="card-body">
+			<div class="row position-relative">
+				<div class="col-8 product-link" (click)="goToProduct()">
+					<p class="fs-5 cursor fw-bold mb-1">{{product.productName}}</p>
+					<p class="truncate-overflow"><small>{{product.productDescription}}</small></p>
+				</div>
+
+				<div class="col-4 position-absolute bottom-0 end-0" *ngIf="product.discountID != null">
+					<p class="h4 text-center pb-0 mb-0">{{ product.productPrice - (product.productPrice * (discountAmount / 100)) | currency}}</p>
+					<p class="text-center"><small>({{product.productPrice | currency}})</small></p>
+					<button class="btn btn-success rounded-pill w-100" (click)="addToCart()" [disabled]="product.productQuantity == 0"><i class="fa-solid fa-cart-shopping pe-1"></i>Køb</button>
+				</div>
+				<div class="col-4 position-absolute bottom-0 end-0" *ngIf="product.discountID == null">
+					<p class="h4 text-center pb-0 mb-0">{{ product.productPrice - (product.productPrice * (discountAmount / 100)) | currency}}</p>
+					<p class="pt-4 mb-0"></p>
+					<button class="btn btn-success rounded-pill w-100 mb-2" *ngIf="product.productQuantity != 0" (click)="addToCart()" [disabled]="product.productQuantity == 0"><i class="fa-solid fa-cart-shopping pe-1"></i>Køb</button>
+				</div>
+			</div>
+		</div>
+
+		<div class="card-footer border-0 d-flex align-items-center" style="background-color: #fff!important">
+			<i class="fa-regular fa-square-check pe-2" style="color: #4cae4c" *ngIf="product.productQuantity != 0"></i>
+			<p class="mb-0 pb-1" *ngIf="product.productQuantity != 0">Er på lager</p>
+
+			<i class="fa-regular fa-square-check pe-2" style="color: red" *ngIf="product.productQuantity == 0"></i>
+			<p class="mb-0 pb-1" *ngIf="product.productQuantity == 0">Ikke på lager</p>
+		</div>
+	  </div>
+	</div>
+</div>

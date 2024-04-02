@@ -1,0 +1,115 @@
+<div class="container-fluid pt-2">
+	<div class="row gy-4">
+		<div class="offset-2 col-8 gx-0">
+			<a routerLink="/admin" type="button" class="w-25 btn btn-primary bg-primary" ><i class="fa-solid fa-arrow-left-long"></i> Tilbage</a>
+		</div>
+		<div class="offset-2 col-8">
+
+			<div class="row d-flex gap-1 flex-nowrap mt-3">
+				<div class="col-6 pt-2 border rounded">
+					<div class="d-flex justify-content-between bg-dark p-2 rounded">
+						<button class="btn btn-primary" (click)="saveCategory()">Gem <i class="fa-solid fa-floppy-disk"></i></button>
+						<button class="btn btn-primary" (click)="cancelCategory()">Annuller <i class="fa-solid fa-ban"></i></button>
+					</div>
+
+					<div>
+						<label class="form-label">Kategori Navn</label>
+						<span class="form-text text-danger">*</span>
+						<input class="form-control" required [(ngModel)]="category.categoryName">
+					</div>
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th scope="col">ID</th>
+								<th scope="col">Navn</th>
+								<th scope="col">Produkt Antal</th>
+								<th scope="col">Handlinger</th>
+							</tr>
+						</thead>
+
+						<tbody>
+							<tr *ngFor="let category of categories">
+								<td>{{ category.categoryID }}</td>
+								<td>{{ category.categoryName }}</td>
+								<td>{{ (category.productCount) || 0 }}</td>
+								<td class="d-flex gap-2">
+									<button type="button" class="btn btn-success bg-success" (click)="editCategory(category)"><i class="fa-solid fa-pen-to-square"></i></button>
+									<button type="button" class="btn btn-danger bg-danger" (click)="deleteCategory(category)"><i class="fa-solid fa-trash"></i></button>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+
+				<div class="col-6 pt-2 border rounded">
+					<div class="d-flex justify-content-between bg-dark p-2 rounded">
+						<button class="btn btn-primary" (click)="saveProductType()">Gem <i class="fa-solid fa-floppy-disk"></i></button>
+						<button class="btn btn-primary" (click)="cancelProductType()">Annuller <i class="fa-solid fa-ban"></i></button>
+					</div>
+
+					<div>
+						<label class="form-label">Produkt Type Navn</label>
+						<span class="form-text text-danger">*</span>
+						<input class="form-control" [(ngModel)]="productType.productTypeName">
+					</div>
+
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th scope="col">ID</th>
+								<th scope="col">Navn</th>
+								<th scope="col">Handlinger</th>
+							</tr>
+						</thead>
+
+						<tbody>
+							<tr *ngFor="let productType of productTypes">
+								<td>{{ productType.productTypeID }}</td>
+								<td>{{ productType.productTypeName }}</td>
+								<td class="d-flex gap-2">
+									<button type="button" class="btn btn-success bg-success" (click)="editProductType(productType)"><i class="fa-solid fa-pen-to-square"></i></button>
+									<button type="button" class="btn btn-danger bg-danger" (click)="deleteProductType(productType)"><i class="fa-solid fa-trash"></i></button>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row mt-3">
+		<div class="offset-2 col-8 border pt-2 rounded">
+			<div class="d-flex justify-content-between bg-dark p-2 rounded">
+				<button class="btn btn-primary" (click)="saveManufacturer()">Gem <i class="fa-solid fa-floppy-disk"></i></button>
+				<button class="btn btn-primary" (click)="cancelManufacturer()">Annuller <i class="fa-solid fa-ban"></i></button>
+			</div>
+
+			<div>
+				<label class="form-label">Fabrikant Navn</label>
+				<span class="form-text text-danger">*</span>
+				<input class="form-control" [(ngModel)]="manufacturer.manufacturerName">
+			</div>
+
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th scope="col">ID</th>
+						<th scope="col">Navn</th>
+						<th scope="col">Handlinger</th>
+					</tr>
+				</thead>
+
+				<tbody>
+					<tr *ngFor="let manufacturer of manufacturers">
+						<td>{{ manufacturer.manufacturerID }}</td>
+						<td>{{ manufacturer.manufacturerName }}</td>
+						<td class="d-flex gap-2">
+							<button type="button" class="btn btn-success bg-success" (click)="editManufacturer(manufacturer)"><i class="fa-solid fa-pen-to-square"></i></button>
+							<button type="button" class="btn btn-danger bg-danger" (click)="deleteManufacturer(manufacturer)"><i class="fa-solid fa-trash"></i></button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>

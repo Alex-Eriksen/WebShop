@@ -1,0 +1,42 @@
+<div class="container-fluid d-flex justify-content-center w-100 bg-light">
+	<div class="col-xxl-8 col-lg-12 bg-white">
+		<div class="row gx-0 py-2">
+			<!-- Category -->
+			<div class="col-3 px-2">
+				<navbar></navbar>
+			</div>
+
+			<!-- Discount Items -->
+			<div class="col-9 px-2" *ngIf="currentProduct.productID != 0">
+				<div class="row gx-1">
+					<div class="col-5 d-flex flex-column justify-content-center">
+						<img [src]="'http://localhost:5001/api/product/photo/'+currentProduct.photos[0].imageName" alt="">
+						<p class="text-center">Varenummer: {{currentProduct.productID}}</p>
+					</div>
+
+					<div class="col-7">
+						<p class="fs-3">{{currentProduct.productName | uppercase}}</p>
+						<p style="line-height: 1.45; font-size: 12px;">{{currentProduct.productDescription}}</p>
+					</div>
+				</div>
+
+				<div class="row g-0">
+					<div class="col-5 d-flex flex-row justify-content-between">
+						<div class="row gx-3">
+							<div class="col-3" *ngFor="let photo of currentProduct.photos"><img [src]="'http://localhost:5001/api/product/photo/'+photo.imageName" alt="" class="img-fluid"></div>
+						</div>
+					</div>
+
+					<div class="col-7 d-flex flex-row justify-content-between">
+						<div class="row gx-0">
+							<p class="h4 text-center pb-0 mb-0" *ngIf="currentProduct.discount == null">{{ currentProduct.productPrice | currency}}</p>
+							<p class="h4 text-center pb-0 mb-0" *ngIf="currentProduct.discount != null">{{ currentProduct.productPrice - (currentProduct.productPrice * (currentProduct.discount.discountPercent / 100)) | currency}}</p>
+							<p class="text-center" *ngIf="currentProduct.discount != null"><small>({{currentProduct.productPrice | currency}})</small></p>
+						</div>
+						<button class="btn btn-success rounded-pill w-50 h-75" (click)="addItem()" [disabled]="currentProduct.productQuantity == 0"><i class="fa-solid fa-cart-shopping pe-1"></i>Køb</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

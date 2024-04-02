@@ -1,0 +1,30 @@
+<div class="offset-3 col-lg-6 d-flex flex-column gap-3 my-4">
+	<div class="w-100 d-flex flex-column gap-3 mx-auto">
+		<h5>Konto</h5>
+
+		<input-field label="Brugernavn" [(valueBind)]="accountRequest.username" (isValidChange)="validate($event)"></input-field>
+
+		<input-field label="Email" type="email" [(valueBind)]="accountRequest.email" (isValidChange)="validate($event)"></input-field>
+
+		<input-field label="Kodeord" type="password" [(valueBind)]="accountRequest.password" (isValidChange)="validate($event)"></input-field>
+
+		<input-field label="Bekræft Kodeord" type="password" [(valueBind)]="passwordValidator" (isValidChange)="validate($event)"></input-field>
+	</div>
+
+	<div class="w-100 d-flex flex-column gap-3 mx-auto">
+		<h5>Personlige Oplysninger</h5>
+
+		<input-field label="Fornavn" [(valueBind)]="customerRequest.firstName" (isValidChange)="validate($event)"></input-field>
+
+		<input-field label="Efternavn" [(valueBind)]="customerRequest.lastName" (isValidChange)="validate($event)"></input-field>
+
+		<input-field label="Telefon nummer" [(valueBind)]="customerRequest.phoneNumber" (isValidChange)="validate($event)"></input-field>
+
+		<input-field label="Postnummer" [(valueBind)]="customerRequest.zipCode" (isValidChange)="validate($event)"></input-field>
+
+		<input-select label="Køn" [options]="genders" [(valueBind)]="customerRequest.gender" (isValidChange)="validate($event)"></input-select>
+
+		<input-select label="Land" [options]="countries" [(valueBind)]="customerRequest.countryID" (isValidChange)="validate($event)"></input-select>
+	</div>
+	<button class="btn btn-primary w-100" (click)="submit()" [disabled]="isValid ? false : true">Opret konto</button>
+</div>

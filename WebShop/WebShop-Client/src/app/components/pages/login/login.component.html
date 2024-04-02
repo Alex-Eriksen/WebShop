@@ -1,0 +1,10 @@
+<div class="offset-3 col-lg-6 d-flex flex-column gap-3">
+	<input-field label="Brugernavn / Email" type="email" [(valueBind)]="request.username_Email" (isValidChange)="validate($event)"></input-field>
+
+	<input-field label="Kodeord" type="password" [(valueBind)]="request.password" (isValidChange)="validate($event)"></input-field>
+
+	<div class="d-flex flex-row gap-3">
+		<button class="btn btn-primary w-50" type="submit" [disabled]="isValid ? false : true" (click)="login()">Login</button>
+		<button class="btn btn-secondary w-50" type="submit" (click)="register()">Opret Konto</button>
+	</div>
+</div>

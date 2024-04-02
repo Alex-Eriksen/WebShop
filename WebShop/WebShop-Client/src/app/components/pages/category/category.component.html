@@ -1,0 +1,11 @@
+<div class="offset-2 col-8" style="background-color: #fff;">
+    <div class="row py-2">
+        <div class="col-3">
+            <navbar></navbar>
+        </div>
+        <div class="col-9">
+            <h3>{{category.categoryName}} Produkter</h3>
+			<product-display *ngFor="let product of products" [product]="product"></product-display>
+        </div>
+    </div>
+</div>

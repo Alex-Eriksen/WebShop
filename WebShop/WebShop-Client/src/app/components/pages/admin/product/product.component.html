@@ -1,0 +1,105 @@
+<div class="container-fluid pt-2">
+	<div class="row gy-4">
+		<div class="offset-2 col-8 d-flex justify-content-between">
+			<a routerLink="/admin" type="button" class="w-25 btn btn-primary bg-primary" ><i class="fa-solid fa-arrow-left-long"></i> Tilbage</a>
+			<button type="button" class="w-25 btn btn-primary bg-primary" (click)="create()">Tilføj Produkt <i class="fa-solid fa-plus"></i></button>
+		</div>
+		<div class="offset-2 col-8">
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th scope="col">Varenummer</th>
+						<th scope="col">Produkt Navn</th>
+						<th scope="col">Pris</th>
+						<th scope="col">Antal</th>
+						<th scope="col">Handlinger</th>
+					</tr>
+				</thead>
+
+				<tbody>
+					<tr *ngFor="let product of products">
+						<td>{{ product.productID }}</td>
+						<td>{{ product.productName }}</td>
+						<td>{{ product.productPrice | currency }}</td>
+						<td>{{ product.productQuantity }}</td>
+						<td class="d-flex gap-2">
+							<button type="button" class="btn btn-success bg-success" (click)="edit(product.productID)"><i class="fa-solid fa-pen-to-square"></i></button>
+							<button type="button" class="btn btn-danger bg-danger"><i class="fa-solid fa-trash"></i></button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+<div *ngIf="currentProduct.productID != 0" style="z-index: 80;" class="d-flex flex-column gap-2 bg-light shadow position-absolute overflow-auto top-50 start-50 translate-middle w-75 h-75 rounded p-3">
+	<div class="row">
+		<div class="col-6 d-flex flex-column gap-3">
+			<input-field label="Navn" [(valueBind)]="currentProduct.productName" (isValidChange)="validate($event)"></input-field>
+		</div>
+
+		<div class="col-6 d-flex flex-column gap-3">
+			<input-field label="Pris" type="number" [(valueBind)]="currentProduct.productPrice" (isValidChange)="validate($event)"></input-field>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-6 d-flex flex-column gap-3">
+			<input-select label="Fabrikant" [options]="manufacturers" [(valueBind)]="currentProduct.manufacturerID" (isValidChange)="validate($event)"></input-select>
+		</div>
+
+		<div class="col-6 d-flex flex-column gap-3">
+			<input-select label="Kategori" [options]="categories" [(valueBind)]="currentProduct.categoryID" (isValidChange)="validate($event)"></input-select>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-6 d-flex flex-column gap-3">
+			<input-area label="Beskrivelse" [(valueBind)]="currentProduct.productDescription" (isValidChange)="validate($event)"></input-area>
+		</div>
+
+		<div class="col-6 d-flex flex-column gap-3">
+			<input-select label="Tilbud" [required]="false" [options]="discounts" [(valueBind)]="currentProduct.discountID" (isValidChange)="validate($event)"></input-select>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-6 d-flex flex-column gap-3">
+			<input-select label="Produkt Type" [options]="productTypes" [(valueBind)]="currentProduct.productTypeID" (isValidChange)="validate($event)"></input-select>
+		</div>
+
+		<div class="col-6 d-flex flex-column gap-3">
+			<input-field label="Udgivelses Dato" type="date" [valueBind]="currentProduct.releaseDate | date:'yyyy-MM-dd'" (valueBindChange)="currentProduct.releaseDate = $event" (isValidChange)="validate($event)"></input-field>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-6 d-flex flex-column gap-3">
+			<input-field label="Antal" type="number" [(valueBind)]="currentProduct.productQuantity" (isValidChange)="validate($event)"></input-field>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="d-flex gap-5">
+			<div *ngFor="let photo of photos" class="col-2">
+				<div class="row">
+					<img class="img-fluid border" [src]="'http://localhost:5001/api/product/photo/'+photo.imageName">
+				</div>
+				<div class="row d-flex justify-content-center">
+					<button class="btn btn-danger w-75" (click)="deletePhoto(photo)">Slet <i class="fa-solid fa-trash"></i></button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div>
+
+		<label class="form-label">Billeder</label>
+		<input type="file" class="form-control" #file multiple placeholder="Vælg Fil" >
+	</div>
+
+	<div class="position-absolute bottom-0 end-0 m-3 d-flex gap-2">
+		<button type="button" class="btn btn-primary bg-primary px-3" [disabled]="isValid ? false : true" (click)="save(file.files)">Gem <i class="fa-solid fa-floppy-disk"></i></button>
+		<button type="button" class="btn btn-primary bg-primary px-3" (click)="cancel()">Annuller <i class="fa-solid fa-ban"></i></button>
+	</div>
+</div>

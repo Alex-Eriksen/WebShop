@@ -1,0 +1,61 @@
+<div class="container-fluid pt-2">
+	<div class="row gy-4">
+		<div class="offset-2 col-8 d-flex justify-content-between">
+			<a routerLink="/admin" type="button" class="w-25 btn btn-primary bg-primary" ><i class="fa-solid fa-arrow-left-long"></i> Tilbage</a>
+			<button type="button" class="w-25 btn btn-primary bg-primary" (click)="create()">Tilføj Produkt <i class="fa-solid fa-plus"></i></button>
+		</div>
+		<div class="offset-2 col-8">
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th scope="col">ID</th>
+						<th scope="col">Salg Navn</th>
+						<th scope="col">Procent</th>
+						<th scope="col">Udløbsdato</th>
+						<th scope="col">Handlinger</th>
+					</tr>
+				</thead>
+
+				<tbody>
+					<tr *ngFor="let discount of discounts">
+						<td>{{ discount.discountID }}</td>
+						<td>{{ discount.name }}</td>
+						<td>{{ discount.discountPercent }}%</td>
+						<td>{{ discount.revoked_At | date }}</td>
+						<td class="d-flex gap-2">
+							<button type="button" class="btn btn-success bg-success" (click)="edit(discount)"><i class="fa-solid fa-pen-to-square"></i></button>
+							<button type="button" class="btn btn-danger bg-danger" (click)="delete(discount)"><i class="fa-solid fa-trash"></i></button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+<div *ngIf="discount.discountID != 0" style="z-index: 80;" class="d-flex flex-column gap-2 bg-light shadow position-absolute overflow-auto top-50 start-50 translate-middle w-75 h-75 rounded p-3 mt-2">
+	<div class="row">
+		<div class="col-6 d-flex flex-column gap-3">
+			<input-field label="Salg Navn" [(valueBind)]="discount.name" (isValidChange)="validate($event)"></input-field>
+		</div>
+
+		<div class="col-6 d-flex flex-column gap-3">
+			<input-field label="Salg Procent" type="number" [(valueBind)]="discount.discountPercent" (isValidChange)="validate($event)"></input-field>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-6 d-flex flex-column gap-3">
+			<input-area label="Beskrivelse" [(valueBind)]="discount.description" (isValidChange)="validate($event)"></input-area>
+		</div>
+
+		<div class="col-6 d-flex flex-column gap-3">
+			<input-field label="Udløbsdato" type="date" [valueBind]="discount.revoked_At | date:'yyyy-MM-dd'" (valueBindChange)="discount.revoked_At = $event"></input-field>
+		</div>
+	</div>
+
+	<div class="position-absolute bottom-0 end-0 m-3 d-flex gap-2">
+		<button type="button" class="btn btn-primary bg-primary px-3" [disabled]="isValid ? false : true" (click)="save()">Gem <i class="fa-solid fa-floppy-disk"></i></button>
+		<button type="button" class="btn btn-primary bg-primary px-3" (click)="cancel()">Annuller <i class="fa-solid fa-ban"></i></button>
+	</div>
+</div>

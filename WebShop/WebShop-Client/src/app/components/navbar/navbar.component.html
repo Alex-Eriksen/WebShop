@@ -1,0 +1,8 @@
+<div class="container-fluid">
+	<div class="list-group list-group-flush">
+		<a [routerLink]="'category/'+category.categoryID" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center border border-primary ripple mb-2" *ngFor="let category of categories">
+			{{category.categoryName}}
+			<span class="badge bg-primary rounded-pill">{{category.productCount}}</span>
+		</a>
+	</div>
+</div>

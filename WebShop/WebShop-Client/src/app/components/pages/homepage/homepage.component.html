@@ -1,0 +1,17 @@
+<div class="container-fluid d-flex justify-content-center w-100">
+	<div class="col-xxl-8 col-lg-12" style="background-color: #fff;">
+		<div class="row gx-0 py-2">
+			<!-- Category -->
+			<div class="col-3">
+				<navbar></navbar>
+			</div>
+
+			<!-- Discount Items -->
+			<div class="col-9">
+				<a href=""><img src="https://www.proshop.dk/Images/daily_activities_1_center_banner_35057c5a4ff4.jpg" alt="" class="img-fluid"></a>
+				<h4 class="text-start pt-3">Produkter på tilbud</h4>
+				<product-display *ngFor="let product of itemsOnDiscount" [product]="product"></product-display>
+			</div>
+		</div>
+	</div>
+</div>
